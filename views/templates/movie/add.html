@@ -1,0 +1,236 @@
+{% extends './base.html'%}
+
+{% block css %}
+<style>
+    .display-5 {
+        font-size: 2.3rem;
+    }
+
+    .course-content a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .course-content a:hover,
+    .course-content a:focus {
+        text-decoration: underline;
+    }
+
+    body.dark .home .course-content a:hover,
+    body.dark .home .course-content a:focus {
+        text-decoration: underline white;
+    }
+
+    .create-course a {
+        background-color: var(--primary-color);
+    }
+
+    .create-course a:hover {
+        background-color: #5646ff;
+    }
+
+    .content-noteboard a {
+        background-color: var(--primary-color);
+    }
+
+    .content-noteboard a:hover {
+        background-color: #5646ff;
+    }
+
+    body.dark .home .create-course a {
+        border: 1px solid white;
+    }
+
+    body.dark .home .create-course a:hover {
+        background-color: #262627;
+    }
+
+    body.dark .home .content-noteboard a {
+        border: 1px solid white;
+    }
+
+    body.dark .home .content-noteboard a:hover {
+        background-color: #262627;
+    }
+
+    .content-noteboard {
+        background-color: white;
+    }
+
+    .custom-file-button input[type=file] {
+        margin-left: -2px !important;
+    }
+
+    .custom-file-button input[type=file]::-webkit-file-upload-button {
+        display: none;
+    }
+
+    .custom-file-button input[type=file]::file-selector-button {
+        display: none;
+    }
+
+    .custom-file-button:hover label {
+        background-color: #dde0e3;
+        cursor: pointer;
+    }
+</style>
+{% endblock %}
+
+{% block contentTitle %}
+Movies
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt--7 con-content" style="padding: 30px 0; border-radius: 10px;">
+    <div class="row container-fluid justify-content-center">
+        <div class="col-xl-8 order-xl-2 mb-5 mb-xl-0">
+            <div class="card shadow user-content" style="border-radius: 10px;">
+                <div class="card-header" style="border-radius: 10px 10px 0 0;">
+                    <div class="row align-items-center">
+                        <div class="col-8">
+                            <h3 class="mb-0 p-2">Add Movies</h3>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form method="POST" id="mainForm">
+                        <h6 class="heading-small text-muted mb-4">Movie Information</h6>
+                        <div class="pl-lg-4">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="input-title">Title</label>
+                                        <input type="text" id="input-title" name="title" class="form-control form-control-alternative" placeholder="Movie Title" value="">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="input-director">Director</label>
+                                        <input type="text" id="input-director" name="director" class="form-control form-control-alternative" placeholder="Movie Director" value="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group mt-2">
+                                        <label class="form-control-label" for="input-release-date">Release Date</label>
+                                        <input class="form-control form-control-alternative" id="input-release-date" name="releaseDate" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group mt-2">
+                                        <label class="form-control-label" for="input-running-time">Running Time</label>
+                                        <input type="text" id="input-running-time" name="runningTime" class="form-control form-control-alternative" placeholder="Running Time" value="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg">
+                                    <div class="form-group mt-2">
+                                        <label for="genre" class="form-control-label">Genre</label>
+                                        <input type="text" id="input-genre" name="genre" class="form-control form-control-alternative" placeholder="Movie Genres (comma seperated)" value="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="my-2">
+
+                        <!-- Description -->
+                        <h6 class="heading-small text-muted mb-4 mt-3">Additional Data</h6>
+                        <div class="pl-lg-4">
+                            <div class="form-group ">
+                                <label for="starring" class="form-control-label">Movie Starring</label>
+                                <textarea rows="2" id="input-starring" name="starring" class="form-control form-control-alternative" placeholder=""></textarea>
+                            </div>
+                        </div>
+                        <div class="pl-lg-4">
+                            <div class="form-group mt-2">
+                                <label>Movie Synopsis</label>
+                                <textarea rows="4" id="input-synopsis" name="synopsis" class="form-control form-control-alternative" placeholder=""></textarea>
+                            </div>
+                        </div>
+                        <input type="hidden" id="imgUrl" name="imgUrl" value="">
+                    </form>
+                    <form>
+                        <div class="pl-lg-4">
+                            <div class="form-group mt-2">
+                                <label>Upload Picture (200x300px) </label>
+                                <div class="row">
+                                    <div class="col-lg-9">
+                                        <div class="input-group custom-file-button">
+                                            <label class="input-group-text" for="inputGroupFile">Upload</label>
+                                            <input type="file" id="pictureInput" class="form-control" id="inputGroupFile">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <button type="button" id="submitPicture" class="btn btn-dark">Submit Picture</button>
+                                    </div>
+                                </div>
+                                <span id="successMsg" class="text-success" style="display:none;">Upload Success</span>
+                                <span id="errMsg" class="text-danger" style="display:none;">Upload Failed please refresh and try again</span>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="pl-lg-4 mt-4">
+                        <button type="button" id="submitMain" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block js %}
+<script>
+    $('#input-release-date').datepicker({
+        uiLibrary: 'bootstrap4'
+    });
+    $('#submitPicture').click(function() {
+        let image = document.getElementById('pictureInput').files[0];
+        var reader = new FileReader();
+
+        reader.onloadend = function() {
+            var imgData = reader.result;
+            var base64result = imgData.split(',')[1];
+            var data = new FormData();
+            data.append("key", "6d207e02198a847aa98d0a2a901485a5");
+            data.append("source", base64result);
+            data.append("format", "json");
+            $.ajax({
+                type: "POST",
+                enctype: 'multipart/form-data',
+                url: "https://freeimage.host/api/1/upload",
+                data: data,
+                processData: false,
+                contentType: false,
+                cache: false,
+                timeout: 800000,
+                success: function(data) {
+                    //$("#output").text(data);
+                    console.log("SUCCESS : ", data.image.url);
+                    $("#submitPicture").prop("disabled", true);
+                    $("#imgUrl").val(data.image.url);
+                    $("#successMsg").show();
+                },
+                error: function(e) {
+                    //$("#output").text(e.responseText);
+                    console.log("ERROR : ", e);
+                    // $("#submitPicture").prop("disabled", true);
+                    $("#errMsg").show();
+                }
+            });
+        }
+        if (image) {
+            reader.readAsDataURL(image);
+        } else {
+            console.log("File is Missing");
+        }
+    });
+
+    $('#submitMain').click(function() {
+        $('#mainForm').submit();
+    });
+</script>
+{% endblock %}
+{% endblock %}

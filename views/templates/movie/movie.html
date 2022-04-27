@@ -1,0 +1,72 @@
+{% extends './base.html'%}
+
+{% block css %}
+<style>
+    .display-5 {
+        font-size: 2.3rem;
+    }
+
+    .course-content a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .course-content a:hover,
+    .course-content a:focus {
+        text-decoration: underline;
+    }
+
+    body.dark .home .course-content a:hover,
+    body.dark .home .course-content a:focus {
+        text-decoration: underline white;
+    }
+
+    .create-course a {
+        background-color: var(--primary-color);
+    }
+
+    .create-course a:hover {
+        background-color: #5646ff;
+    }
+
+    .content-noteboard a {
+        background-color: var(--primary-color);
+    }
+
+    .content-noteboard a:hover {
+        background-color: #5646ff;
+    }
+
+    body.dark .home .create-course a {
+        border: 1px solid white;
+    }
+
+    body.dark .home .create-course a:hover {
+        background-color: #262627;
+    }
+
+    body.dark .home .content-noteboard a {
+        border: 1px solid white;
+    }
+
+    body.dark .home .content-noteboard a:hover {
+        background-color: #262627;
+    }
+
+    .content-noteboard {
+        background-color: white;
+    }
+</style>
+{% endblock %}
+
+{% block contentTitle %}
+Movies
+{% endblock %}
+
+{% block content %}
+<!--CONTENT-->
+<div class="container-fluid col-11 concor" style=" padding: 30px 0px; ">
+
+</div>
+
+{% endblock %}
